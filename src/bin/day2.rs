@@ -1,6 +1,8 @@
 use regex::Regex;
 use std::fs;
 
+/// Represents a password policy line from the input
+/// of the form "i-j c: passwd"
 struct Policy {
     i: usize,
     j: usize,
@@ -29,6 +31,8 @@ fn main() {
     println!("part 2: {}", part2(&policies));
 }
 
+/// Count the number of policies that are valid according to the rule
+/// that the number of characters matching c is between i and j.
 fn part1(policies: &[Policy]) -> usize {
     policies
         .iter()
@@ -44,6 +48,9 @@ fn part1(policies: &[Policy]) -> usize {
         .count()
 }
 
+/// Count the number of policies that are valid according to the rule
+/// the exactly one of the characters at i and j be equal to c. NB
+/// that i and j are one-based indices.
 fn part2(policies: &[Policy]) -> usize {
     policies
         .iter()
