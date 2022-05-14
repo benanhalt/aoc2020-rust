@@ -1,5 +1,5 @@
-use std::fs;
 use std::cmp::Ordering;
+use std::fs;
 
 fn main() {
     let contents = fs::read_to_string("day1.txt").expect("failed to load input");
@@ -17,7 +17,7 @@ fn part1(values: &Vec<i32>) -> i32 {
 
         // Since the values are sorted we can use binary search
         // to determine if b exists in the remainder of values.
-        if binary_search(&values[i+1..], b) {
+        if binary_search(&values[i + 1..], b) {
             return b * a;
         }
     }
@@ -27,13 +27,15 @@ fn part1(values: &Vec<i32>) -> i32 {
 /// Find a, b, c in values s.t. a + b + c = 2020 and return a * b * c.
 fn part2(values: &Vec<i32>) -> i32 {
     for (i, a) in values.iter().enumerate() {
-        let tail = &values[i+1..];
+        let tail = &values[i + 1..];
 
         for (j, b) in tail.iter().enumerate() {
             let c = 2020 - a - b;
-            if c < 1 { break; }
+            if c < 1 {
+                break;
+            }
 
-            if binary_search(&tail[j+1..], c) {
+            if binary_search(&tail[j + 1..], c) {
                 return c * b * a;
             }
         }
@@ -48,7 +50,7 @@ fn binary_search(values: &[i32], target: i32) -> bool {
     while high > low + 1 {
         let i = (high + low) / 2;
 
-//        println!("step");
+        //        println!("step");
         match values[i].cmp(&target) {
             Ordering::Equal => {
                 return true;
